@@ -6,7 +6,7 @@ import argparse
 from modules import transform, resnet, network, contrastive_loss
 from utils import yaml_config_hook, save_model
 from torch.utils import data
-
+import tensorflow as tf
 
 def train():
     loss_epoch = 0
@@ -134,11 +134,10 @@ if __name__ == "__main__":
     criterion_cluster = contrastive_loss.ClusterLoss(class_num, args.cluster_temperature, loss_device).to(loss_device)
     # train
     tuple1 = train_dataset[1]
-    tuple2 = train_dataset[2]
     tuple3 = tuple1[0]
-    print("tuple 1:", tuple1[0])
-    print("tuple 2:", tuple2[0])
     print("tuple 3:", tuple3[0].shape)
+    converted = tf.image.grayscale_to_rgb(tuple3[0])
+    print(converted.shape)
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
