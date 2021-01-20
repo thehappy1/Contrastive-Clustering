@@ -106,6 +106,7 @@ if __name__ == "__main__":
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
+        print(train_dataset.__getitem__(2)[0])
     else:
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(
@@ -132,6 +133,7 @@ if __name__ == "__main__":
         loss_device)
     criterion_cluster = contrastive_loss.ClusterLoss(class_num, args.cluster_temperature, loss_device).to(loss_device)
     # train
+    print(dataset.__getitem__(2)[0])
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
