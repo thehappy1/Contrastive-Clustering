@@ -138,7 +138,7 @@ if __name__ == "__main__":
     tuple3 = tuple1[0]
     print("tuple 1:", tuple1[0])
     print("tuple 2:", tuple2[0])
-    print("tuple 3:", tuple3[0])
+    print("tuple 3:", tuple3[0].shape)
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
