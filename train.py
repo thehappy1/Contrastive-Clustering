@@ -135,8 +135,10 @@ if __name__ == "__main__":
     # train
     tuple1 = train_dataset[1]
     tuple2 = train_dataset[2]
+    tuple3 = tuple1[0]
     print("tuple 1:", tuple1[0])
     print("tuple 2:", tuple2[0])
+    print("tuple 3:", tuple3[0])
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
