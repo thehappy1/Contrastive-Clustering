@@ -133,7 +133,8 @@ if __name__ == "__main__":
         loss_device)
     criterion_cluster = contrastive_loss.ClusterLoss(class_num, args.cluster_temperature, loss_device).to(loss_device)
     # train
-    print(train_dataset[1][0].shape)
+    tuple = train_dataset[1]
+    print(tuple[0])
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
