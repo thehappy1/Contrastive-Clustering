@@ -100,6 +100,22 @@ if __name__ == "__main__":
             transform=transform.Transforms(size=args.image_size).test_transform,
         )
         class_num = 200
+    elif args.dataset == "FASHION-MNIST":
+        train_dataset = torchvision.datasets.FashionMNIST(
+            root=args.dataset_dir,
+            train=True,
+            download=True,
+            transform=transform.Transforms(size=args.image_size).test_transform,
+        )
+        test_dataset = torchvision.datasets.CIFAR10(
+            root=args.dataset_dir,
+            train=False,
+            download=True,
+            transform=transform.Transforms(size=args.image_size).test_transform,
+        )
+        dataset = data.ConcatDataset([train_dataset, test_dataset])
+        class_num = 10
+
     else:
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(

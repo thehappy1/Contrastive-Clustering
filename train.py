@@ -90,7 +90,7 @@ if __name__ == "__main__":
             transform=transform.Transforms(s=0.5, size=args.image_size),
         )
         class_num = 200
-    elif args.dataset == "fashion-mnist":
+    elif args.dataset == "FASHION-MNIST":
         train_dataset = torchvision.datasets.FashionMNIST(
             root=args.dataset_dir,
             download=True,
