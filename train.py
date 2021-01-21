@@ -91,14 +91,15 @@ if __name__ == "__main__":
         )
         class_num = 200
     elif args.dataset == "FASHION-MNIST":
-        train_dataset = torchvision.datasets.FashionMNIST(
+        from fmnist import FashionMNIST
+        train_dataset = FashionMNIST(
             root=args.dataset_dir,
             download=True,
             train=True,
             transform=transform.Transforms(size=args.image_size, s=0.5),
         )
 
-        test_dataset = torchvision.datasets.FashionMNIST(
+        test_dataset = FashionMNIST(
             root=args.dataset_dir,
             download=True,
             train=False,
@@ -106,7 +107,6 @@ if __name__ == "__main__":
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
-        #print(train_dataset.__getitem__(2)[0])
     else:
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(
