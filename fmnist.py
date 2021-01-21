@@ -87,6 +87,7 @@ class MNIST(VisionDataset):
             data_file = self.test_file
         self.data, self.targets = torch.load(os.path.join(self.processed_folder, data_file))
 
+        print("input: ", self.data.shape, " und size: ", self.data.size)
         #reshape and stack to get shape of (60000, 28, 28, 3)
         self.data = self.data.reshape((60000, 28, 28))
         self.data = np.stack((self.data,) * 3, axis=-1)
@@ -499,3 +500,12 @@ def read_image_file(path: str) -> torch.Tensor:
     assert(x.dtype == torch.uint8)
     assert(x.ndimension() == 3)
     return x
+from modules import transform
+
+train_dataset = FashionMNIST(
+            root="./datasets",
+            download=True,
+            train=True,
+            transform=transform.Transforms(28, s=0.5),
+        )
+print(train_dataset.train_data.shape)
