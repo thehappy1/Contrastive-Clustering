@@ -7,6 +7,7 @@ from modules import transform, resnet, network, contrastive_loss
 from utils import yaml_config_hook, save_model
 from torch.utils import data
 
+
 def train():
     loss_epoch = 0
     for step, ((x_i, x_j), _) in enumerate(data_loader):
@@ -106,7 +107,7 @@ if __name__ == "__main__":
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
-        else:
+    else:
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(
         dataset,
