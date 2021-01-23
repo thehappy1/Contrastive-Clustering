@@ -136,7 +136,7 @@ if __name__ == "__main__":
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
-        if epoch % 10 == 0:
+        if epoch % 25 == 0: # if epoch / 25 = i + leftover, while leftover == 0 -> save model
             save_model(args, model, optimizer, epoch)
         print(f"Epoch [{epoch}/{args.epochs}]\t Loss: {loss_epoch / len(data_loader)}")
     save_model(args, model, optimizer, args.epochs)
