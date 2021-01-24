@@ -6,7 +6,7 @@ dataset_dir: "./datasets"
 # train options
 batch_size: 64
 image_size: 28 #upscaled to 224, this leads to blurred images
-start_epoch: 1
+start_epoch: 1000
 epochs: 1000
 dataset: "FASHION-MNIST" # CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / tiny-ImageNet
 
