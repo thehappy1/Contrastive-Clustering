@@ -3,15 +3,15 @@ from torch.utils.data import Dataset
 import torchvision
 import os
 import pandas as pd
+import glob
 
 class Fpidataset(Dataset):
     # Constructor
     def __init__(self, train, img_size, transform=True):
-        # Image directory
+
         self.transform = transform
         self.img_size = img_size
         self.train = train
-        #self.df = self.df[self.df['fold'] == fold]
 
         if transform is not None:
             transform = torchvision.transforms.Compose([
@@ -23,6 +23,7 @@ class Fpidataset(Dataset):
         df = pd.read_csv('data/styles.csv', error_bad_lines=False)
         df['image_path'] = df.apply(lambda x: os.path.join("data\images", str(x.id) + ".jpg"), axis=1)
 
+        # map articleType as number
         mapper = {}
         for i, cat in enumerate(list(df.articleType.unique())):
             mapper[cat] = i
@@ -55,7 +56,7 @@ class Fpidataset(Dataset):
         return image, label
 
 
-def get_i_items(df, i):
+def get_i_items(df, number_of_items):
     # get i items of each condition
 
     # calculate classes with more than 1000 items
@@ -69,7 +70,7 @@ def get_i_items(df, i):
 
     for element in temp:
         print("Füge Items mit target", element, "ein.")
-        dataframe = dataframe.append(df_temp[df_temp.targets == element][:i])
+        dataframe = dataframe.append(df_temp[df_temp.targets == element][:number_of_items])
         print("Anzahl items", len(dataframe))
 
     return dataframe
