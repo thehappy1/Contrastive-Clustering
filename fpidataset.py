@@ -21,7 +21,7 @@ class Fpidataset(Dataset):
         self.transform = transform
 
         df = pd.read_csv('data/styles.csv', error_bad_lines=False)
-        df['image_path'] = df.apply(lambda x: os.path.join("data\images", str(x.id) + ".jpg"), axis=1)
+        df['image_path'] = df.apply(lambda x: os.path.join("/data/images", str(x.id) + ".jpg"), axis=1)
 
         # map articleType as number
         mapper = {}
@@ -32,8 +32,7 @@ class Fpidataset(Dataset):
 
         if self.train:
             self.df = get_i_items(df,0, 800)
-            print("------------------------------------")
-            print(self.df.head(25))
+            print(self.df.head())
         else:
             self.df = get_i_items(df,800, 1000)
 
@@ -45,7 +44,6 @@ class Fpidataset(Dataset):
     def __getitem__(self, idx):
         #get imagepath
         img_path = self.df.image_path[idx]
-        print(img_path)
 
         #open as PIL Image
         img = Image.open(img_path).convert('RGB')
