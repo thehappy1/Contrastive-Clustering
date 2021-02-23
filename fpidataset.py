@@ -55,7 +55,6 @@ class Fpidataset(Dataset):
         #get label
         label = self.df.targets[idx]
 
-        print("done mit ", idx)
         return image, label
 
 
