@@ -21,7 +21,9 @@ class Fpidataset(Dataset):
         self.transform = transform
 
         df = pd.read_csv('data/styles.csv', error_bad_lines=False)
-        df['image_path'] = df.apply(lambda x: os.path.join("/media/sda/fschmedes/Contrastive-Clustering/data/images", str(x.id) + ".jpg"), axis=1)
+        #/media/sda/fschmedes/Contrastive-Clustering/
+        df['image_path'] = df.apply(lambda x: os.path.join("data/images", str(x.id) + ".jpg"), axis=1)
+        df = df.drop([32309, 40000, 36381, 16194, 6695]) #drop rows with no image
 
         # map articleType as number
         mapper = {}
@@ -32,7 +34,6 @@ class Fpidataset(Dataset):
 
         if self.train:
             self.df = get_i_items(df,0, 800)
-            print(self.df.head())
         else:
             self.df = get_i_items(df,800, 1000)
 
@@ -71,9 +72,9 @@ def get_i_items(df, start, stop):
     #for each targetclass in temp insert i items in dataframe
 
     for label in temp:
-        print("Füge Items mit target", label, "ein.")
+        #print("Füge Items mit target", label, "ein.")
         dataframe = dataframe.append(df_temp[df_temp.targets == label][start:stop])
-        print("Anzahl items", len(dataframe))
+        #print("Anzahl items", len(dataframe))
 
     dataframe = dataframe.reset_index()
     return dataframe
