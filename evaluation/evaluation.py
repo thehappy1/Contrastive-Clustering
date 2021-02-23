@@ -9,9 +9,9 @@ def evaluate(label, pred):
     f = metrics.fowlkes_mallows_score(label, pred)
     pred_adjusted = get_y_preds(label, pred, len(set(label)))
     acc = metrics.accuracy_score(pred_adjusted, label)
-    chc = metrics.calinski_harabasz_score(label, pred)
-    dbs = metrics.davies_bouldin_score(label, pred)
-    return nmi, ari, f, acc, chc, dbs
+    #chc = metrics.calinski_harabasz_score(label, pred)
+    #dbs = metrics.davies_bouldin_score(label, pred)
+    return nmi, ari, f, acc
 
 
 def calculate_cost_matrix(C, n_clusters):
