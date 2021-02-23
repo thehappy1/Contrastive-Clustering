@@ -45,6 +45,7 @@ class Fpidataset(Dataset):
     def __getitem__(self, idx):
         #get imagepath
         img_path = self.df.image_path[idx]
+        print(img_path)
 
         #open as PIL Image
         img = Image.open(img_path).convert('RGB')
