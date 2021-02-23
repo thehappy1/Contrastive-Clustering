@@ -107,6 +107,21 @@ if __name__ == "__main__":
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
+    elif args.dataset == 'FPI':
+        from fpidataset import Fpidataset
+        train_dataset = Fpidataset(
+            train=True,
+            img_size=args.image_size,
+            transform=transform.Transforms(size=args.image_size, s=0.5)
+        )
+
+        test_dataset = Fpidataset(
+            train=False,
+            img_size=args.image_size,
+            transform=transform.Transforms(size=args.image_size, s=0.5)
+        )
+        dataset = data.ConcatDataset([train_dataset, test_dataset])
+        class_num = 10
     else:
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(
@@ -136,7 +151,7 @@ if __name__ == "__main__":
     for epoch in range(args.start_epoch, args.epochs):
         lr = optimizer.param_groups[0]["lr"]
         loss_epoch = train()
-        if epoch % 25 == 0: # if epoch / 25 = i + leftover, while leftover == 0 -> save model
+        if epoch % 50 == 0: # if epoch / 25 = i + leftover, while leftover == 0 -> save model
             save_model(args, model, optimizer, epoch)
         print(f"Epoch [{epoch}/{args.epochs}]\t Loss: {loss_epoch / len(data_loader)}")
     save_model(args, model, optimizer, args.epochs)
