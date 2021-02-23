@@ -21,7 +21,7 @@ class Fpidataset(Dataset):
         self.transform = transform
 
         df = pd.read_csv('data/styles.csv', error_bad_lines=False)
-        df['image_path'] = df.apply(lambda x: os.path.join("/data/images", str(x.id) + ".jpg"), axis=1)
+        df['image_path'] = df.apply(lambda x: os.path.join("/media/sda/fschmedes/Contrastive-Clustering/data/images", str(x.id) + ".jpg"), axis=1)
 
         # map articleType as number
         mapper = {}
