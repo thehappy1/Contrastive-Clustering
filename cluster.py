@@ -116,6 +116,20 @@ if __name__ == "__main__":
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
+    elif args.dataset == "FPI":
+        from fpidataset import Fpidataset
+        train_dataset = Fpidataset(
+            train=True,
+            img_size=args.image_size,
+            transform=transform.Transforms(size=args.image_size, s=0.5).test_transform
+        )
+        test_dataset = Fpidataset(
+            train=False,
+            img_size=args.image_size,
+            transform=transform.Transforms(size=args.image_size, s=0.5).test_transform
+        )
+        dataset = data.ConcatDataset([train_dataset, test_dataset])
+        class_num = 10
 
     else:
         raise NotImplementedError
@@ -162,5 +176,5 @@ if __name__ == "__main__":
         for i in range(20):
             for j in super_label[i]:
                 Y[Y_copy == j] = i
-    nmi, ari, f, acc = evaluation.evaluate(Y, X)
-    print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f}'.format(nmi, ari, f, acc))
+    nmi, ari, f, acc, chc = evaluation.evaluate(Y, X)
+    print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f} CHC = {:.4f'.format(nmi, ari, f, acc, chc))
