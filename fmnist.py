@@ -92,6 +92,7 @@ class MNIST(VisionDataset):
         #self.data = self.data.reshape((60000, 28, 28))
         self.data = np.stack((self.data,) * 3, axis=-1)
         print("output: ", self.data.shape)
+
     def __getitem__(self, index: int) -> Tuple[Any, Any]:
         """
         Args:

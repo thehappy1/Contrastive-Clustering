@@ -32,6 +32,8 @@ class Fpidataset(Dataset):
 
         if self.train:
             self.df = get_i_items(df,0, 800)
+            print("------------------------------------")
+            print(self.df.head(25))
         else:
             self.df = get_i_items(df,800, 1000)
 
@@ -73,4 +75,5 @@ def get_i_items(df, start, stop):
         dataframe = dataframe.append(df_temp[df_temp.targets == label][start:stop])
         print("Anzahl items", len(dataframe))
 
+    dataframe = dataframe.reset_index()
     return dataframe
