@@ -13,7 +13,7 @@ dataset: "FPI" # CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / t
 # model options
 resnet: "ResNet34" # ResNet18 / ResNet34 / ResNet50
 feature_dim: 128
-model_path: "save/FPI"
+model_path: "save/FASHION-MNIST"
 reload: False
 
 # loss options
