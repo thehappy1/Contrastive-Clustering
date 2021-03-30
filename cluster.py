@@ -150,6 +150,7 @@ if __name__ == "__main__":
 
     print("### Creating features from model ###")
     features = torch.zeros((len(data_loader.sampler), 512)).cuda()
+    print("features from CUDA: ", features)
     X, Y = inference(data_loader, model, device)
     if args.dataset == "CIFAR-100":  # super-class
         super_label = [
