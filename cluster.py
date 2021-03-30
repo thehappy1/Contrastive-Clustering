@@ -26,6 +26,7 @@ def inference(loader, model, device):
     feature_vector = np.array(feature_vector)
     labels_vector = np.array(labels_vector)
     print("Features shape {}".format(feature_vector.shape))
+    print("feature Vector X", feature_vector)
     return feature_vector, labels_vector
 
 
@@ -148,6 +149,7 @@ if __name__ == "__main__":
     model.to(device)
 
     print("### Creating features from model ###")
+    features = torch.zeros((len(data_loader.sampler), 512)).cuda()
     X, Y = inference(data_loader, model, device)
     if args.dataset == "CIFAR-100":  # super-class
         super_label = [
