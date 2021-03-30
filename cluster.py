@@ -179,5 +179,5 @@ if __name__ == "__main__":
         for i in range(20):
             for j in super_label[i]:
                 Y[Y_copy == j] = i
-    nmi, ari, f, acc = evaluation.evaluate(Y, X, features)
+    nmi, ari, f, acc = evaluation.evaluate(Y, X, features.cpu())
     print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f}'.format(nmi, ari, f, acc))
