@@ -150,7 +150,7 @@ if __name__ == "__main__":
 
     print("### Creating features from model ###")
     features = torch.zeros((len(data_loader.sampler), 512)).cuda()
-    print("features from CUDA: ", features.shape)
+    print("features from CUDA: ", features)
     X, Y = inference(data_loader, model, device)
     if args.dataset == "CIFAR-100":  # super-class
         super_label = [
@@ -179,5 +179,5 @@ if __name__ == "__main__":
         for i in range(20):
             for j in super_label[i]:
                 Y[Y_copy == j] = i
-    nmi, ari, f, acc = evaluation.evaluate(Y, X)
+    nmi, ari, f, acc = evaluation.evaluate(Y, X, features)
     print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f}'.format(nmi, ari, f, acc))
