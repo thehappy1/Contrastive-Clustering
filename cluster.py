@@ -28,6 +28,7 @@ def inference(loader, model, device):
             print(f"Step [{step}/{len(loader)}]\t Computing features...")
     feature_vector = np.array(feature_vector)
     labels_vector = np.array(labels_vector)
+    extracted_features = np.array(extracted_features)
     print("Features shape {}".format(feature_vector.shape))
     print("feature extracted: ", extracted_features.shape)
     return feature_vector, labels_vector
