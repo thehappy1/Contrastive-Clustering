@@ -9,10 +9,11 @@ def evaluate(label, pred, extracted_features):
     f = metrics.fowlkes_mallows_score(label, pred)
     pred_adjusted = get_y_preds(label, pred, len(set(label)))
     acc = metrics.accuracy_score(pred_adjusted, label)
-    #chc = metrics.calinski_harabasz_score(label, pred)
     ds = metrics.davies_bouldin_score(extracted_features, pred)
-    print("davies-bouldin: ", ds)
-    return nmi, ari, f, acc
+    s = metrics.silhouette_score(extracted_features, pred, metric='euclidean')
+    from s_dbw import S_Dbw
+    s_dbw = S_Dbw(extracted_features, pred)
+    return nmi, ari, f, acc, ds, s, s_dbw
 
 
 def calculate_cost_matrix(C, n_clusters):
