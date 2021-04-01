@@ -31,7 +31,7 @@ def inference(loader, model, device):
     extracted_features = np.array(extracted_features)
     print("Features shape {}".format(feature_vector.shape))
     print("feature extracted: ", extracted_features.shape)
-    return feature_vector, labels_vector
+    return feature_vector, labels_vector, extracted_features
 
 
 if __name__ == "__main__":
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     model.to(device)
 
     print("### Creating features from model ###")
-    X, Y = inference(data_loader, model, device)
+    X, Y, extracted_features = inference(data_loader, model, device)
     if args.dataset == "CIFAR-100":  # super-class
         super_label = [
             [72, 4, 95, 30, 55],
@@ -181,5 +181,5 @@ if __name__ == "__main__":
         for i in range(20):
             for j in super_label[i]:
                 Y[Y_copy == j] = i
-    nmi, ari, f, acc = evaluation.evaluate(Y, X, features)
+    nmi, ari, f, acc = evaluation.evaluate(Y, X, extracted_features)
     print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f}'.format(nmi, ari, f, acc))

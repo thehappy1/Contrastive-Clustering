@@ -3,14 +3,14 @@ from sklearn import metrics
 from munkres import Munkres
 
 
-def evaluate(label, pred, features):
+def evaluate(label, pred, extracted_features):
     nmi = metrics.normalized_mutual_info_score(label, pred)
     ari = metrics.adjusted_rand_score(label, pred)
     f = metrics.fowlkes_mallows_score(label, pred)
     pred_adjusted = get_y_preds(label, pred, len(set(label)))
     acc = metrics.accuracy_score(pred_adjusted, label)
     #chc = metrics.calinski_harabasz_score(label, pred)
-    #ds = metrics.davies_bouldin_score(features, pred)
+    ds = metrics.davies_bouldin_score(extracted_features, pred)
     print("davies-bouldin: ", ds)
     return nmi, ari, f, acc
 
