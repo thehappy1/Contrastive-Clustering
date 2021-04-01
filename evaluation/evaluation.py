@@ -10,7 +10,7 @@ def evaluate(label, pred, features):
     pred_adjusted = get_y_preds(label, pred, len(set(label)))
     acc = metrics.accuracy_score(pred_adjusted, label)
     #chc = metrics.calinski_harabasz_score(label, pred)
-    ds = metrics.davies_bouldin_score(features, pred)
+    #ds = metrics.davies_bouldin_score(features, pred)
     print("davies-bouldin: ", ds)
     return nmi, ari, f, acc
 

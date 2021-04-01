@@ -14,11 +14,14 @@ def inference(loader, model, device):
     model.eval()
     feature_vector = []
     labels_vector = []
+    extracted_features = []
     for step, (x, y) in enumerate(loader):
         x = x.to(device)
         with torch.no_grad():
-            c = model.forward_cluster(x)
+            c, h = model.forward_cluster(x)
+        h = h.detach()
         c = c.detach()
+        extracted_features.extend(h.cpu().detach().numpy())
         feature_vector.extend(c.cpu().detach().numpy())
         labels_vector.extend(y.numpy())
         if step % 20 == 0:
@@ -26,7 +29,7 @@ def inference(loader, model, device):
     feature_vector = np.array(feature_vector)
     labels_vector = np.array(labels_vector)
     print("Features shape {}".format(feature_vector.shape))
-    print("feature Vector X", feature_vector)
+    print("feature extracted: ", extracted_features)
     return feature_vector, labels_vector
 
 
@@ -179,5 +182,5 @@ if __name__ == "__main__":
         for i in range(20):
             for j in super_label[i]:
                 Y[Y_copy == j] = i
-    nmi, ari, f, acc = evaluation.evaluate(Y, X, features.cpu())
+    nmi, ari, f, acc = evaluation.evaluate(Y, X, features)
     print('NMI = {:.4f} ARI = {:.4f} F = {:.4f} ACC = {:.4f}'.format(nmi, ari, f, acc))

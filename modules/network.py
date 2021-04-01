@@ -37,4 +37,4 @@ class Network(nn.Module):
         h = self.resnet(x)
         c = self.cluster_projector(h)
         c = torch.argmax(c, dim=1)
-        return c
+        return c, h
