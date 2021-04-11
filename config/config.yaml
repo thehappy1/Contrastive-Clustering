@@ -12,7 +12,7 @@ dataset: "FASHION-MNIST" # CIFAR-10 / CIFAR-100 / STL-10
   #/ ImageNet-10 / ImageNet-dogs / tiny-ImageNet / FASHION-MNIST / FPI
 
 # model options
-resnet: "ResNet50" # ResNet18 / ResNet34 / ResNet50
+resnet: "ResNet34" # ResNet18 / ResNet34 / ResNet50
 feature_dim: 128
 model_path: "save/FASHION-MNIST"
 reload: False
