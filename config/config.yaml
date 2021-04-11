@@ -8,10 +8,11 @@ batch_size: 64
 image_size: 28 #upscaled to 224, this leads to blurred images
 start_epoch: 0
 epochs: 1000
-dataset: "FASHION-MNIST" # CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / tiny-ImageNet / FASHION-MNIST / FPI
+dataset: "FASHION-MNIST" # CIFAR-10 / CIFAR-100 / STL-10
+  #/ ImageNet-10 / ImageNet-dogs / tiny-ImageNet / FASHION-MNIST / FPI
 
 # model options
-resnet: "ResNet34" # ResNet18 / ResNet34 / ResNet50
+resnet: "ResNet50" # ResNet18 / ResNet34 / ResNet50
 feature_dim: 128
 model_path: "save/FASHION-MNIST"
 reload: False
@@ -21,3 +22,6 @@ learning_rate: 0.0003
 weight_decay: 0.
 instance_temperature: 0.5
 cluster_temperature: 1.0
+
+
+

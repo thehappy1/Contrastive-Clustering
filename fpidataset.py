@@ -56,9 +56,8 @@ class Fpidataset(Dataset):
 
         return image, label
 
-
+    # get i items of each class
 def get_i_items(df, start, stop):
-    # get i items of each condition
 
     # calculate classes with more than 1000 items
     temp = df.targets.value_counts().sort_values(ascending=False)[:10].index.tolist()
@@ -68,12 +67,10 @@ def get_i_items(df, start, stop):
     dataframe = df[:0]
 
     #for each targetclass in temp insert i items in dataframe
-
     for label in temp:
         #print("Füge Items mit target", label, "ein.")
         dataframe = dataframe.append(df_temp[df_temp.targets == label][start:stop])
         #print("Anzahl items", len(dataframe))
 
     dataframe = dataframe.reset_index()
-    #print (dataframe.head())
     return dataframe
