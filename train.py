@@ -131,6 +131,7 @@ if __name__ == "__main__":
         drop_last=True,
         num_workers=args.workers,
     )
+    print("Dataset: ",args.dataset)
     # initialize model
     res = resnet.get_resnet(args.resnet)
     model = network.Network(res, args.feature_dim, class_num)
