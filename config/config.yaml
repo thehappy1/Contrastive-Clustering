@@ -8,7 +8,7 @@ batch_size: 64
 image_size: 28 #upscaled to 224, this leads to blurred images
 start_epoch: 0
 epochs: 1000
-dataset: "FASHION-MNIST" # CIFAR-10 / CIFAR-100 / STL-10
+dataset: "FPI" # CIFAR-10 / CIFAR-100 / STL-10
   #/ ImageNet-10 / ImageNet-dogs / tiny-ImageNet / FASHION-MNIST / FPI
 
 # model options
