@@ -140,7 +140,7 @@ if __name__ == "__main__":
         raise NotImplementedError
     data_loader = torch.utils.data.DataLoader(
         dataset,
-        batch_size=500,
+        batch_size=250,
         shuffle=False,
         drop_last=False,
         num_workers=args.workers,
