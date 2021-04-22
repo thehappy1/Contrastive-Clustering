@@ -154,6 +154,7 @@ if __name__ == "__main__":
 
     print("### Creating features from model ###")
     X, Y, extracted_features = inference(data_loader, model, device)
+    print("extracted Features shape: ",extracted_features.shape)
     if args.dataset == "CIFAR-100":  # super-class
         super_label = [
             [72, 4, 95, 30, 55],
