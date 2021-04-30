@@ -2,8 +2,8 @@ import numpy as np
 from sklearn import metrics
 from munkres import Munkres
 import pandas as pd
-import matplotlib as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def evaluate(label, pred, extracted_features, dataset):
