@@ -3,19 +3,18 @@ from torch.utils.data import Dataset
 import torchvision
 import os
 import pandas as pd
-import glob
 
 class Fpidataset(Dataset):
     # Constructor
     def __init__(self, train, img_size, transform):
 
         self.transform = transform
-        self.img_size = img_size
+        self.width, self.height = img_size
         self.train = train
 
         if transform is None:
             transform = torchvision.transforms.Compose([
-                torchvision.transforms.Resize((img_size, img_size)),
+                torchvision.transforms.Resize((self.width, self.height)),
                 torchvision.transforms.ToTensor()
             ])
         self.transform = transform
