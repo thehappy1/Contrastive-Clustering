@@ -5,7 +5,7 @@ dataset_dir: "./datasets"
 
 # train options
 batch_size: 64
-image_size: (60, 80) #upscaled to 224, this leads to blurred images
+image_size: 60, 80 #upscaled to 224, this leads to blurred images
 start_epoch: 0
 epochs: 1000
 dataset: "FPI" # CIFAR-10 / CIFAR-100 / STL-10
