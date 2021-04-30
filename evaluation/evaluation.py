@@ -1,9 +1,12 @@
 import numpy as np
 from sklearn import metrics
 from munkres import Munkres
+import pandas as pd
+import matplotlib as plt
+import seaborn as sns
 
 
-def evaluate(label, pred, extracted_features):
+def evaluate(label, pred, extracted_features, dataset):
     nmi = metrics.normalized_mutual_info_score(label, pred)
     ari = metrics.adjusted_rand_score(label, pred)
     f = metrics.fowlkes_mallows_score(label, pred)
@@ -13,7 +16,32 @@ def evaluate(label, pred, extracted_features):
     s = metrics.silhouette_score(extracted_features, pred, metric='euclidean')
     from s_dbw import S_Dbw
     s_dbw = S_Dbw(extracted_features, pred)
+    compute_tsne(features=extracted_features, predictions=pred, dataset=dataset)
     return nmi, ari, f, acc, ds, s, s_dbw
+
+def compute_tsne(features, predictions, dataset):
+    from sklearn.manifold import TSNE
+
+    tsne = TSNE(n_components=2, perplexity=20, n_jobs=16, random_state=0, verbose=0).fit_transform(features)
+
+    viz_df = pd.DataFrame(data=tsne[:5000])
+    viz_df['Label'] = predictions[:5000]
+
+    viz_df.to_csv('tsne.csv')
+    plt.subplots(figsize=(8, 5))
+    sns.scatterplot(x=0, y=1, hue=viz_df.Label.tolist(), legend='full', hue_order=sorted(viz_df['Label'].unique()),
+                    palette=sns.color_palette("hls", n_colors=10),
+                    alpha=.5,
+                    data=viz_df)
+    l = plt.legend(bbox_to_anchor=(-.1, 1.00, 1.1, .5), loc="lower left", markerfirst=True,
+                   mode="expand", borderaxespad=0, ncol=10 + 1, handletextpad=0.01, )
+
+    l.texts[0].set_text("")
+    plt.ylabel("")
+    plt.xlabel("")
+    plt.tight_layout()
+    plt.savefig(dataset+'_tnse.png', dpi=150)
+    plt.clf()
 
 
 def calculate_cost_matrix(C, n_clusters):
