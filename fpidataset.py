@@ -9,12 +9,12 @@ class Fpidataset(Dataset):
     def __init__(self, train, img_size, transform):
 
         self.transform = transform
-        self.width, self.height = img_size
+        self.img_size = img_size
         self.train = train
 
         if transform is None:
             transform = torchvision.transforms.Compose([
-                torchvision.transforms.Resize((self.width, self.height)),
+                torchvision.transforms.Resize(self.img_size),
                 torchvision.transforms.ToTensor()
             ])
         self.transform = transform
