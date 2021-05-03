@@ -34,7 +34,7 @@ def compute_tsne(features, predictions, dataset):
     viz_df['Label'] = viz_df["Label"].map(dict)
 
     viz_df.to_csv('tsne.csv')
-    plt.subplots(figsize=(8, 5))
+    plt.subplots(figsize=(14, 7))
     sns.scatterplot(x=0, y=1, hue=viz_df.Label.tolist(), legend='full', hue_order=sorted(viz_df['Label'].unique()),
                     palette=sns.color_palette("hls", n_colors=10),
                     alpha=.5,
