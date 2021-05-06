@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 
 def evaluate(label, pred, extracted_features, dataset):
-    print(pred[:5000])
     nmi = metrics.normalized_mutual_info_score(label, pred)
     ari = metrics.adjusted_rand_score(label, pred)
     f = metrics.fowlkes_mallows_score(label, pred)
@@ -27,6 +26,7 @@ def compute_tsne(features, label, dataset):
 
     viz_df = pd.DataFrame(data=tsne[:5000])
     viz_df['Label'] = label[:5000]
+    print(viz_df['Label'].head(1000))
 
     if dataset == "FASHION-MNIST":
         dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt",
