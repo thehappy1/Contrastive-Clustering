@@ -108,9 +108,8 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == 'FPI':
-        width, height = args.image_size
-        print("widht: ", width)
-        print("height: ", height)
+        print(args.image_size)
+
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,
