@@ -61,6 +61,8 @@ class Transforms:
                 self.test_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
             self.train_transform = torchvision.transforms.Compose(self.train_transform)
             self.test_transform = torchvision.transforms.Compose(self.test_transform)
+        print(self.test_transform)
+        print(self.train_transform)
 
     def __call__(self, x):
         return self.train_transform(x), self.train_transform(x)
