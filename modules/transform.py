@@ -1,8 +1,6 @@
 import torchvision
 import cv2
 import numpy as np
-import math
-
 
 class GaussianBlur:
     def __init__(self, kernel_size, min=0.1, max=2.0):
@@ -31,7 +29,7 @@ class Transforms:
         if blur:
             self.train_transform.append(GaussianBlur(kernel_size=23))
         self.train_transform.append(torchvision.transforms.ToTensor())
-        if math.isnan(size[0]):
+        if np.isnan(size[0]):
             self.test_transform = [
                 torchvision.transforms.Resize(size=(size, size)),
                 torchvision.transforms.ToTensor(),
@@ -41,6 +39,7 @@ class Transforms:
                 torchvision.transforms.Resize(size=(size[0], size[1])),
                 torchvision.transforms.ToTensor(),
             ]
+        print(self.test_transform)
         if mean and std:
             self.train_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
             self.test_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
