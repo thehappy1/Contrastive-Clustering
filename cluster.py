@@ -41,7 +41,6 @@ if __name__ == "__main__":
         parser.add_argument(f"--{k}", default=v, type=type(v))
     args = parser.parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     if args.dataset == "CIFAR-10":
         train_dataset = torchvision.datasets.CIFAR10(
             root=args.dataset_dir,
@@ -122,9 +121,6 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == "FPI":
-        width, height = args.image_size
-        print("widht: ", width)
-        print("height: ", height)
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,

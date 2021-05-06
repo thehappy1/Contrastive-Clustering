@@ -40,6 +40,8 @@ if __name__ == "__main__":
     torch.cuda.manual_seed_all(args.seed)
     torch.cuda.manual_seed(args.seed)
     np.random.seed(args.seed)
+    size = {args.width, args.height}
+    print(size)
 
     # prepare data
     if args.dataset == "CIFAR-10":
@@ -108,8 +110,7 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == 'FPI':
-        print(args.image_size)
-
+        g
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,
