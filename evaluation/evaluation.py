@@ -24,8 +24,8 @@ def compute_tsne(features, label, dataset):
 
     tsne = TSNE(n_components=2, perplexity=20, n_jobs=16, random_state=0, verbose=0).fit_transform(features)
 
-    viz_df = pd.DataFrame(data=tsne[:5000])
-    viz_df['Label'] = label[:5000]
+    viz_df = pd.DataFrame(data=tsne[:10000])
+    viz_df['Label'] = label[:10000]
     print(viz_df['Label'].head(1000))
 
     if dataset == "FASHION-MNIST":
