@@ -110,7 +110,6 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == 'FPI':
-        args.sizoesd = 123
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,
@@ -135,6 +134,7 @@ if __name__ == "__main__":
         num_workers=args.workers,
     )
     print("Dataset: ",args.dataset)
+    print(size)
     # initialize model
     res = resnet.get_resnet(args.resnet)
     model = network.Network(res, args.feature_dim, class_num)
