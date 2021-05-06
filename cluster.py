@@ -29,8 +29,8 @@ def inference(loader, model, device):
     feature_vector = np.array(feature_vector)
     labels_vector = np.array(labels_vector)
     extracted_features = np.array(extracted_features)
-    print("Features shape {}".format(feature_vector.shape))
-    print("feature extracted: ", extracted_features.shape)
+    #print("Features shape {}".format(feature_vector.shape))
+    #print("feature extracted: ", extracted_features.shape)
     return feature_vector, labels_vector, extracted_features
 
 
@@ -122,6 +122,9 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == "FPI":
+        width, height = args.image_size
+        print("widht: ", width)
+        print("height: ", height)
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,
