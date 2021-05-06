@@ -34,7 +34,7 @@ def compute_tsne(features, label, dataset):
         dict = {0: "Shirts", 1: "Watches", 2: "T-Shirts", 3: "C. Shoes", 4: "Handbags", 5: "Tops", 6: "Kurtas",
                  7: "S. Shoes", 8: "Heels", 9 : "Sunglasses"}
 
-    viz_df['Label'] = viz_df["Label"].map(dict)
+    viz_df['Label'] = viz_df["Label"].map(dict).astype(str)
 
     viz_df.to_csv('tsne.csv')
     plt.subplots(figsize=(14, 7))
