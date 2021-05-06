@@ -31,7 +31,7 @@ class Transforms:
         if blur:
             self.train_transform.append(GaussianBlur(kernel_size=23))
         self.train_transform.append(torchvision.transforms.ToTensor())
-        if math.isan(size[0]):
+        if math.isnan(size[0]):
             self.test_transform = [
                 torchvision.transforms.Resize(size=(size, size)),
                 torchvision.transforms.ToTensor(),
