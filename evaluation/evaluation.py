@@ -26,7 +26,8 @@ def compute_tsne(features, label, dataset):
 
     viz_df = pd.DataFrame(data=tsne[:5000])
     viz_df['Label'] = label[:5000]
-    print("head: ", viz_df.Label.head(10))
+    print("test 1: ", viz_df.Label.tolist())
+    print("test 2:", viz_df['Label'].unique())
     if dataset == "FASHION-MNIST":
         dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt",
                 7: "Sneaker", 8: "Bag",
