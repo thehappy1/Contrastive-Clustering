@@ -3,6 +3,7 @@ from torch.utils.data import Dataset
 import torchvision
 import os
 import pandas as pd
+import numpy as np
 
 class Fpidataset(Dataset):
     # Constructor
@@ -23,12 +24,6 @@ class Fpidataset(Dataset):
         #/media/sda/fschmedes/Contrastive-Clustering/
         df['image_path'] = df.apply(lambda x: os.path.join("data/images", str(x.id) + ".jpg"), axis=1)
         df = df.drop([32309, 40000, 36381, 16194, 6695]) #drop bad rows with no image
-
-        # map articleType as number
-        mapper = {}
-        for i, cat in enumerate(list(df.articleType.unique())):
-            mapper[cat] = i
-        df['targets'] = df.articleType.map(mapper)
 
         if self.train:
             self.df = get_i_items(df,0, 800)
@@ -59,8 +54,14 @@ class Fpidataset(Dataset):
 def get_i_items(df, start, stop):
 
     # calculate classes with more than 1000 items
-    temp = df.targets.value_counts().sort_values(ascending=False)[:10].index.tolist()
-    df_temp = df[df["targets"].isin(temp)]
+    temp = df.articleType.value_counts().sort_values(ascending=False)[:10].index.tolist()
+    df_temp = df[df["articleType"].isin(temp)]
+
+    # map articleType as number
+    mapper = {}
+    for i, cat in enumerate(list(df_temp.articleType.unique())):
+        mapper[cat] = i
+    df_temp['targets'] = df.articleType.map(mapper)
 
     #generate new empty dataframe with the columns of the original
     dataframe = df[:0]
@@ -68,8 +69,9 @@ def get_i_items(df, start, stop):
     #for each targetclass in temp insert i items in dataframe
     for label in temp:
         #print("Füge Items mit target", label, "ein.")
-        dataframe = dataframe.append(df_temp[df_temp.targets == label][start:stop])
+        dataframe = dataframe.append(df_temp[df_temp.articleType == label][start:stop])
         #print("Anzahl items", len(dataframe))
 
     dataframe = dataframe.reset_index()
+    dataframe["targets"] = dataframe["targets"].astype(np.int64)
     return dataframe
