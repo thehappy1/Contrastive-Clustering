@@ -114,13 +114,13 @@ if __name__ == "__main__":
         train_dataset = Fpidataset(
             train=True,
             img_size=args.image_size,
-            transform=transform.Transforms(size=args.image_size, s=0.5)
+            transform=transform.Transforms(size=size, s=0.5)
         )
 
         test_dataset = Fpidataset(
             train=False,
             img_size=args.image_size,
-            transform=transform.Transforms(size=args.image_size, s=0.5)
+            transform=transform.Transforms(size=size, s=0.5)
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
