@@ -40,8 +40,6 @@ if __name__ == "__main__":
     torch.cuda.manual_seed_all(args.seed)
     torch.cuda.manual_seed(args.seed)
     np.random.seed(args.seed)
-    size = {args.width, args.height}
-    print(size[0])
 
     # prepare data
     if args.dataset == "CIFAR-10":
@@ -114,13 +112,12 @@ if __name__ == "__main__":
         train_dataset = Fpidataset(
             train=True,
             img_size=args.image_size,
-            transform=transform.Transforms(size=size, s=0.5)
+            transform=transform.Transforms(width=args.width, height=args.height, s=0.5)
         )
-
         test_dataset = Fpidataset(
             train=False,
             img_size=args.image_size,
-            transform=transform.Transforms(size=size, s=0.5)
+            transform=transform.Transforms(width=args.width, height=args.height, s=0.5)
         )
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
@@ -134,7 +131,6 @@ if __name__ == "__main__":
         num_workers=args.workers,
     )
     print("Dataset: ",args.dataset)
-    print(size)
     # initialize model
     res = resnet.get_resnet(args.resnet)
     model = network.Network(res, args.feature_dim, class_num)
