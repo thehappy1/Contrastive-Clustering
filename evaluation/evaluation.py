@@ -26,8 +26,7 @@ def compute_tsne(features, label, dataset):
 
     viz_df = pd.DataFrame(data=tsne[:5000])
     viz_df['Label'] = label[:5000]
-    print("test 1: ", viz_df.Label.tolist())
-    print("test 2:", viz_df['Label'].unique())
+
     if dataset == "FASHION-MNIST":
         dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt",
                 7: "Sneaker", 8: "Bag",
@@ -37,6 +36,9 @@ def compute_tsne(features, label, dataset):
                  7: "S. Shoes", 8: "Heels", 9 : "Sunglasses"}
 
     viz_df['Label'] = viz_df["Label"].map(dict)
+
+    print("test 1: ", viz_df.Label.tolist())
+    print("test 2:", viz_df['Label'].unique())
 
     viz_df.to_csv('tsne.csv')
     plt.subplots(figsize=(14, 7))
