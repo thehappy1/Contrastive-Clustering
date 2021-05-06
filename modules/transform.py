@@ -33,7 +33,7 @@ class Transforms:
             self.train_transform.append(torchvision.transforms.ToTensor())
             self.test_transform = [
                 torchvision.transforms.Resize(size=(height, width)),
-                torchvision.transfor-ms.ToTensor(),
+                torchvision.transforms.ToTensor(),
             ]
             if mean and std:
                 self.train_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
