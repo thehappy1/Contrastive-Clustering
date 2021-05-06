@@ -21,7 +21,7 @@ class Transforms:
     def __init__(self, size, s=1.0, mean=None, std=None, blur=False, width=None, height=None):
         if width != 0:
             self.train_transform = [
-                torchvision.transforms.RandomResizedCrop(size=(width, height)),
+                torchvision.transforms.RandomResizedCrop(size=(height, width)),
                 torchvision.transforms.RandomHorizontalFlip(),
                 torchvision.transforms.RandomApply(
                     [torchvision.transforms.ColorJitter(0.8 * s, 0.8 * s, 0.8 * s, 0.2 * s)],
@@ -32,8 +32,8 @@ class Transforms:
                 self.train_transform.append(GaussianBlur(kernel_size=23))
             self.train_transform.append(torchvision.transforms.ToTensor())
             self.test_transform = [
-                torchvision.transforms.Resize(size=(width, height)),
-                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Resize(size=(height, width)),
+                torchvision.transfor-ms.ToTensor(),
             ]
             if mean and std:
                 self.train_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
