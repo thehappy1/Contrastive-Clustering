@@ -16,20 +16,23 @@ def evaluate(label, pred, extracted_features, dataset):
     s = metrics.silhouette_score(extracted_features, pred, metric='euclidean')
     from s_dbw import S_Dbw
     s_dbw = S_Dbw(extracted_features, pred)
-    compute_tsne(features=extracted_features, predictions=pred, dataset=dataset)
+    compute_tsne(features=extracted_features, label=label, dataset=dataset)
     return nmi, ari, f, acc, ds, s, s_dbw
 
-def compute_tsne(features, predictions, dataset):
+def compute_tsne(features, label, dataset):
     from sklearn.manifold import TSNE
 
     tsne = TSNE(n_components=2, perplexity=20, n_jobs=16, random_state=0, verbose=0).fit_transform(features)
 
     viz_df = pd.DataFrame(data=tsne[:5000])
-    viz_df['Label'] = predictions[:5000]
-    #dict = {0: "Shirts", 1: "Watches", 2: "T-Shirts", 3: "C. Shoes", 4: "Handbags", 5: "Tops", 6: "Kurtas",
-            #7: "S. Shoes", 8: "Heels", 9 : "Sunglasses"}
-    dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt", 7: "Sneaker", 8: "Bag",
-            9: "Ankle boot"}
+    viz_df['Label'] = label[:5000]
+    if dataset == "FASHION-MNIST":
+        dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt",
+                7: "Sneaker", 8: "Bag",
+                9: "Ankle boot"}
+    else:
+        dict = {0: "Shirts", 1: "Watches", 2: "T-Shirts", 3: "C. Shoes", 4: "Handbags", 5: "Tops", 6: "Kurtas",
+                 7: "S. Shoes", 8: "Heels", 9 : "Sunglasses"}
 
     viz_df['Label'] = viz_df["Label"].map(dict)
 
