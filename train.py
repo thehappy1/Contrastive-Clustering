@@ -110,7 +110,7 @@ if __name__ == "__main__":
         dataset = data.ConcatDataset([train_dataset, test_dataset])
         class_num = 10
     elif args.dataset == 'FPI':
-        g
+        args.sizoesd = 123
         from fpidataset import Fpidataset
         train_dataset = Fpidataset(
             train=True,
