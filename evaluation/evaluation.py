@@ -33,8 +33,8 @@ def compute_tsne(features, label, dataset):
                 7: "Sneaker", 8: "Bag",
                 9: "Ankle boot"}
     else:
-        dict = {0: "Shirts", 1: "Watches", 2: "T-Shirts", 3: "C. Shoes", 4: "Handbags", 5: "Tops", 6: "Kurtas",
-                 7: "S. Shoes", 8: "Heels", 9 : "Sunglasses"}
+        dict = {0: "Shirts", 1: "Watches", 2: "T-Shirts", 3: "Casual Shoes", 4: "Handbags", 5: "Tops", 6: "Kurtas",
+                 7: "Sport Shoes", 8: "Heels", 9 : "Sunglasses"}
 
     viz_df['Label'] = viz_df["Label"].map(dict)
 
