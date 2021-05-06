@@ -41,7 +41,7 @@ if __name__ == "__main__":
     torch.cuda.manual_seed(args.seed)
     np.random.seed(args.seed)
     size = {args.width, args.height}
-    print(size)
+    print(size[0])
 
     # prepare data
     if args.dataset == "CIFAR-10":
