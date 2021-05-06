@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 
 def evaluate(label, pred, extracted_features, dataset):
+    print(pred.unique())
     nmi = metrics.normalized_mutual_info_score(label, pred)
     ari = metrics.adjusted_rand_score(label, pred)
     f = metrics.fowlkes_mallows_score(label, pred)
