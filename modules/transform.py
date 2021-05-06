@@ -29,16 +29,10 @@ class Transforms:
         if blur:
             self.train_transform.append(GaussianBlur(kernel_size=23))
         self.train_transform.append(torchvision.transforms.ToTensor())
-        if np.isnan(size[0]):
-            self.test_transform = [
-                torchvision.transforms.Resize(size=(size, size)),
-                torchvision.transforms.ToTensor(),
-            ]
-        else:
-            self.test_transform = [
-                torchvision.transforms.Resize(size=(size[0], size[1])),
-                torchvision.transforms.ToTensor(),
-            ]
+        self.test_transform = [
+            torchvision.transforms.Resize(size=(size[0], size[1])),
+            torchvision.transforms.ToTensor(),
+        ]
         print(self.test_transform)
         if mean and std:
             self.train_transform.append(torchvision.transforms.Normalize(mean=mean, std=std))
