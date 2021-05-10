@@ -19,7 +19,7 @@ class GaussianBlur:
 
 class Transforms:
     def __init__(self, size=None, s=1.0, mean=None, std=None, blur=False, width=None, height=None):
-        if width != 0:
+        if width == 60:
             self.train_transform = [
                 torchvision.transforms.RandomResizedCrop(size=(height, width)),
                 torchvision.transforms.RandomHorizontalFlip(),
