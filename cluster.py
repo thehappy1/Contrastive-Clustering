@@ -112,6 +112,7 @@ if __name__ == "__main__":
             download=True,
             transform=transform.Transforms(size=args.image_size).test_transform,
         )
+        print("imgsize: ", args.image_size)
         test_dataset = FashionMNIST(
             root=args.dataset_dir,
             train=False,
