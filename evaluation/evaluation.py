@@ -16,7 +16,7 @@ def evaluate(label, pred, extracted_features, dataset):
     s = metrics.silhouette_score(extracted_features, pred, metric='euclidean')
     from s_dbw import S_Dbw
     s_dbw = S_Dbw(extracted_features, pred)
-    compute_tsne(features=extracted_features, label=label, dataset=dataset)
+    compute_tsne(features=extracted_features, label=pred, dataset=dataset)
     return nmi, ari, f, acc, ds, s, s_dbw
 
 def compute_tsne(features, label, dataset):
@@ -26,7 +26,6 @@ def compute_tsne(features, label, dataset):
 
     viz_df = pd.DataFrame(data=tsne[:10000])
     viz_df['Label'] = label[:10000]
-    print(viz_df["Label"].value_counts())
 
     if dataset == "FASHION-MNIST":
         dict = {0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress", 4: "Coat", 5: "Sandal", 6: "Shirt",
